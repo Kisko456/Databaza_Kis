@@ -1,13 +1,13 @@
 <?php
 
-class Nehody extends CI_Controller
+class Uzavery extends CI_Controller
 {
 
     function __construct() {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model('Nehody_model');
+        $this->load->model('Uzavery_model');
     }
 
     public function index(){
@@ -21,11 +21,11 @@ class Nehody extends CI_Controller
             $data['error_msg'] = $this->session->userdata('error_msg');
             $this->session->unset_userdata('error_msg');
         }
-        $data['nehody'] = $this->Nehody_model->getRows();
-        $data['title'] = 'Zoznam nehôd';
+        $data['uzavery'] = $this->Uzavery_model->getRows();
+        $data['title'] = 'Zoznam uzáver';
         //nahratie zoznamu oblastí
 
-        $this->load->view('nehody/index', $data);
+        $this->load->view('uzavery/index', $data);
 
     }
 
@@ -39,14 +39,14 @@ class Nehody extends CI_Controller
 
         //kontrola, ci bolo zaslane id riadka
         if(!empty($id)){
-            $data['nehody'] = $this->Nehody_model->getRows($id);
-            $data['title'] = $data['nehody']['Cas'];
+            $data['uzavery'] = $this->Uzavery_model->getRows($id);
+            $data['title'] = $data['uzavery']['Priemerne_zdrzanie'];
             //nahratie detailu zaznamu
 
-            $this->load->view('nehody/view', $data);
+            $this->load->view('uzavery/view', $data);
 
         }else{
-            redirect('/nehody');
+            redirect('/uzavery');
 
         }
     }
@@ -60,44 +60,50 @@ class Nehody extends CI_Controller
         //zistenie, ci bola zaslana poziadavka na pridanie zazanmu
         if($this->input->post('postSubmit')){
             //definicia pravidiel validacie
+            $this->form_validation->set_rules('Datum_od', 'Datum_od', 'required');
+            $this->form_validation->set_rules('Datum_do', 'Datum_do', 'required');
+            $this->form_validation->set_rules('Km_od', ' Km_od', 'required');
+            $this->form_validation->set_rules('Km_do', 'Km_do', 'required');
+            $this->form_validation->set_rules('Priemerne_zdrzanie', 'Priemerne_zdrzanie', 'required');
+            $this->form_validation->set_rules('Dovod_uzavery', ' Dovod_uzavery', 'required');
+            $this->form_validation->set_rules('Dlzka_obchadzky', 'Dlzka_obchadzky', 'required');
             $this->form_validation->set_rules('idCesty', 'idCesty', 'required');
-            $this->form_validation->set_rules('Datum', 'Datum', 'required');
-            $this->form_validation->set_rules('Cas', ' Cas', 'required');
-            $this->form_validation->set_rules('Zdrzanie', ' Zdrzanie', 'required');
-            $this->form_validation->set_rules('KM_nehody', ' KM_nehody', 'required');
-            $this->form_validation->set_rules('pricina', ' pricina', 'required');
+
 
             //priprava dat pre vlozenie
             $postData = array(
+                'Datum_od' => $this->input->post('Datum_od'),
+                'Datum_do' => $this->input->post('Datum_do'),
+                'Km_od' => $this->input->post('Km_od'),
+                'Km_do' => $this->input->post('Km_do'),
+                'Priemerne_zdrzanie' => $this->input->post('Priemerne_zdrzanie'),
+                'Dovod_uzavery' => $this->input->post('Dovod_uzavery'),
+                'Dlzka_obchadzky' => $this->input->post('Dlzka_obchadzky'),
                 'idCesty' => $this->input->post('idCesty'),
-                'Datum' => $this->input->post('Datum'),
-                'Cas' => $this->input->post('Cas'),
-                'Zdrzanie' => $this->input->post('Zdrzanie'),
-                'KM_nehody' => $this->input->post('KM_nehody'),
-                'Pricina' => $this->input->post('pricina'),
+
 
             );
 
             //validacia zaslanych dat
             if($this->form_validation->run() == true){
                 //vlozenie dat
-                $insert = $this->Nehody_model->insert($postData);
+                $insert = $this->Uzavery_model->insert($postData);
 
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Záznam bol úspešne vložený.');
-                    redirect('/nehody');
+                    redirect('/uzavery');
                 }else{
                     $data['error_msg'] = 'Nastala chyba, skúste to znova.';
                 }
             }
         }
         $data['post'] = $postData;
-        $data['title'] = 'Create Oblast';
+        $data['title'] = 'Create kategoriu';
 
         $data['action'] = 'Pridať';
         //zobrazenie formulara pre vlozenie a editaciu dat
 
-        $this->load->view('nehody/add-edit', $data);
+        $this->load->view('uzavery/add-edit', $data);
 
     }
 
@@ -105,36 +111,40 @@ class Nehody extends CI_Controller
     public function edit($id){
         $data = array();
         //ziskanie dat z tabulky
-        $postData = $this->Nehody_model->getRows($id);
+        $postData = $this->Uzavery_model->getRows($id);
 
         //zistenie, ci bola zaslana poziadavka na aktualizaciu
         if($this->input->post('postSubmit')){
             //definicia pravidiel validacie
+            $this->form_validation->set_rules('Datum_od', 'Datum_od', 'required');
+            $this->form_validation->set_rules('Datum_do', 'Datum_do', 'required');
+            $this->form_validation->set_rules('Km_od', ' Km_od', 'required');
+            $this->form_validation->set_rules('Km_do', 'Km_do', 'required');
+            $this->form_validation->set_rules('Priemerne_zdrzanie', 'Priemerne_zdrzanie', 'required');
+            $this->form_validation->set_rules('Dovod_uzavery', ' Dovod_uzavery', 'required');
+            $this->form_validation->set_rules('Dlzka_obchadzky', 'Dlzka_obchadzky', 'required');
             $this->form_validation->set_rules('idCesty', 'idCesty', 'required');
-            $this->form_validation->set_rules('Datum', 'Datum', 'required');
-            $this->form_validation->set_rules('Cas', ' Cas', 'required');
-            $this->form_validation->set_rules('Zdrzanie', ' Zdrzanie', 'required');
-            $this->form_validation->set_rules('KM_nehody', ' KM_nehody', 'required');
-            $this->form_validation->set_rules('pricina', ' Pricina', 'required');
 
             // priprava dat pre aktualizaciu
             $postData = array(
+                'Datum_od' => $this->input->post('Datum_od'),
+                'Datum_do' => $this->input->post('Datum_do'),
+                'Km_od' => $this->input->post('Km_od'),
+                'Km_do' => $this->input->post('Km_do'),
+                'Priemerne_zdrzanie' => $this->input->post('Priemerne_zdrzanie'),
+                'Dovod_uzavery' => $this->input->post('Dovod_uzavery'),
+                'Dlzka_obchadzky' => $this->input->post('Dlzka_obchadzky'),
                 'idCesty' => $this->input->post('idCesty'),
-                'Datum' => $this->input->post('Datum'),
-                'Cas' => $this->input->post('Cas'),
-                'Zdrzanie' => $this->input->post('Zdrzanie'),
-                'KM_nehody' => $this->input->post('KM_nehody'),
-                'Pricina' => $this->input->post('pricina'),
             );
 
             //validacia zaslanych dat
             if($this->form_validation->run() == true){
                 //aktualizacia dat
-                $update = $this->Nehody_model->update($postData, $id);
+                $update = $this->Uzavery_model->update($postData, $id);
 
                 if($update){
                     $this->session->set_userdata('success_msg', 'Záznam bol úspešne upravený.');
-                    redirect('/nehody');
+                    redirect('/uzavery');
                 }else{
                     $data['error_msg'] = 'Nastala chyba, skúste to znova.';
                 }
@@ -146,7 +156,7 @@ class Nehody extends CI_Controller
         $data['action'] = 'Upraviť';
         //zobrazenie formulara pre vlozenie a editaciu dat
 
-        $this->load->view('nehody/add-edit', $data);
+        $this->load->view('uzavery/add-edit', $data);
 
     }
 
@@ -156,13 +166,13 @@ class Nehody extends CI_Controller
 
         if($id){
             //odstranenie zaznamu
-            $delete = $this->Nehody_model->delete($id);
+            $delete = $this->Uzavery_model->delete($id);
             if($delete){
                 $this->session->set_userdata('success_msg', 'Záznam bol úspešne odstránený.');
             }else{
                 $this->session->set_userdata('error_msg', 'Nastala chyba, skúste to znova.');
             }
         }
-        redirect('/nehody');
+        redirect('/uzavery');
     }
 }

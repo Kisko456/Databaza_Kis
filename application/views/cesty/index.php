@@ -69,68 +69,59 @@
     </nav>
 
     <div class="container">
-        <div class="row"><br></div>
-        <div class="col-xs-12">
-            <?php
-            if(!empty($success_msg)){
-                echo '<div class="alert alert-success">'.$success_msg.'</div>';
-            }elseif(!empty($error_msg)){
-                echo '<div class="alert alert-danger">'.$error_msg.'</div>';
-            }
-            ?>
+        <?php if(!empty($success_msg)){ ?>
+
+
+
+            <div class="col-xs-12">
+                <div class="alert alert-success"><?php echo $success_msg; ?></div>
+            </div>
+        <?php }elseif(!empty($error_msg)){ ?>
+            <div class="col-xs-12">
+                <div class="alert alert-danger"><?php echo $error_msg; ?></div>
+            </div>
+        <?php } ?>
+        <div class="row">
+            <h1>Zoznam ciest</h1>
+
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $action; ?> nehodu <a href="<?php echo site_url('nehody/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
-                    <div class="panel-body">
-                        <form method="post" action="" class="form">
-
-                            <div class="form-group">
-                                <label for="title">Číslo cesty</label>
-                                <input type="text" class="form-control" name="idCesty" id="idCesty" placeholder="Zadajte číslo cesty" value="<?php echo !empty($post['idCesty'])?$post['idCesty']:''; ?>">
-                                <?php echo form_error('idCesty','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Dátum</label>
-                                <input type="text" class="form-control" name="Datum" placeholder="Zadajte dátum nehody" value="<?php echo !empty($post['Datum'])?$post['Datum']:''; ?>">
-                                <?php echo form_error('Datum','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Čas</label>
-                                <input type="text" class="form-control" name="Cas" placeholder="Zadajte čas v minútach" value="<?php echo !empty($post['Cas'])?$post['Cas']:''; ?>">
-                                <?php echo form_error('Cas','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Zdržanie</label>
-                                <input type="text" class="form-control" name="Zdrzanie" placeholder="Zadajte zdržanie v minútach" value="<?php echo !empty($post['Zdrzanie'])?$post['Zdrzanie']:''; ?>">
-                                <?php echo form_error('Zdrzanie','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Kilometer nehody</label>
-                                <input type="text" class="form-control" name="KM_nehody" placeholder="Zadajte kilometer nehody" value="<?php echo !empty($post['KM_nehody'])?$post['KM_nehody']:''; ?>">
-                                <?php echo form_error('KM_nehody','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Príčina</label>
-                                <input type="text" class="form-control" name="pricina" placeholder="Zadajte príčinu" value="<?php echo !empty($post['pricina'])?$post['pricina']:''; ?>">
-                                <?php echo form_error('pricina','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
+                <div class="panel panel-default ">
+                    <div class="panel-heading">Cesty <a href="<?php echo site_url('cesty/add'); ?>" class="glyphicon glyphicon-plus pull-right" ></a></div>
+                    <table id="usertable" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="20%">Oblasť</th>
+                            <th width="20%">Kategória</th>
 
 
+                        </tr>
+                        </thead>
+                        <tbody id="userData">
+                        <?php if(!empty($cesty)): foreach($cesty as $cesty): ?>
+                            <tr>
 
-                            <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrdiť"/>
-                        </form>
-                    </div>
+                                <td><?php echo $cesty['idOblast']; ?></td>
+                                <td><?php echo $cesty['idKategorie']; ?></td>
+
+                                <td>
+                                    <a class="btn btn-info btn-xs" href="<?php echo site_url('cesty/view/'.$cesty['idKategorie']); ?>">Prehľad</a>
+                                    <a class="btn btn-success btn-xs" href="<?php echo site_url('cesty/edit/'.$cesty['idKategorie']); ?>" >Upraviť</a>
+                                    <a class="btn btn-warning btn-xs" href="<?php echo site_url('cesty/delete/'.$cesty['idKategorie']); ?>"  onclick="return confirm('Ste si istý že chcete odstrániť záznam?')">Zmazať</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; else: ?>
+                            <tr><td colspan="4">Záznam nebol nájdený......</td></tr>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
@@ -159,3 +150,5 @@
 
 </body>
 </html>
+
+

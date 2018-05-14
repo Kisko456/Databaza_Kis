@@ -47,10 +47,10 @@
                 <ul class="nav navbar-nav">
                     <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active">Oblasti</a></li>
                     <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active">Kategórie</a></li>
-                    <li><a class="glyphicon glyphicon-alert" href="#"> Nehody</a></li>
-                    <li><a class="glyphicon glyphicon-exclamation-sign" href="#"> Uzávery</a></li>
-                    <li><a class="glyphicon glyphicon-road" href="#"> Cesty</a></li>
-                    <li><a class="glyphicon glyphicon-transfer" href="#"> Premávka</a></li>
+                    <li><a class="glyphicon glyphicon-alert" href="<?php echo site_url('nehody/index'); ?>" class="active"> Nehody</a></li>
+                    <li><a class="glyphicon glyphicon-exclamation-sign" href="<?php echo site_url('uzavery/index'); ?>" class="active"> Uzávery</a></li>
+                    <li><a class="glyphicon glyphicon-road" href="<?php echo site_url('cesty/index'); ?>" class="active"> Cesty</a></li>
+                    <li><a class="glyphicon glyphicon-transfer" href="<?php echo site_url('premavka/index'); ?>" class="active"> Premávka</a></li>
 
                 </ul>
 

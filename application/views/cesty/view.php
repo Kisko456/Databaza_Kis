@@ -69,64 +69,27 @@
     </nav>
 
     <div class="container">
-        <div class="row"><br></div>
-        <div class="col-xs-12">
-            <?php
-            if(!empty($success_msg)){
-                echo '<div class="alert alert-success">'.$success_msg.'</div>';
-            }elseif(!empty($error_msg)){
-                echo '<div class="alert alert-danger">'.$error_msg.'</div>';
-            }
-            ?>
-        </div>
         <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $action; ?> nehodu <a href="<?php echo site_url('nehody/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
-                    <div class="panel-body">
-                        <form method="post" action="" class="form">
+            <div class="panel panel-default">
+                <div class="panel-heading">Detail cesty <a href="<?php
+                    echo site_url('cesty/'); ?>" class="glyphicon glyphicon-arrow-left
+pull-right"></a></div>
+                <div class="panel-body">
 
-                            <div class="form-group">
-                                <label for="title">Číslo cesty</label>
-                                <input type="text" class="form-control" name="idCesty" id="idCesty" placeholder="Zadajte číslo cesty" value="<?php echo !empty($post['idCesty'])?$post['idCesty']:''; ?>">
-                                <?php echo form_error('idCesty','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Dátum</label>
-                                <input type="text" class="form-control" name="Datum" placeholder="Zadajte dátum nehody" value="<?php echo !empty($post['Datum'])?$post['Datum']:''; ?>">
-                                <?php echo form_error('Datum','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Čas</label>
-                                <input type="text" class="form-control" name="Cas" placeholder="Zadajte čas v minútach" value="<?php echo !empty($post['Cas'])?$post['Cas']:''; ?>">
-                                <?php echo form_error('Cas','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Zdržanie</label>
-                                <input type="text" class="form-control" name="Zdrzanie" placeholder="Zadajte zdržanie v minútach" value="<?php echo !empty($post['Zdrzanie'])?$post['Zdrzanie']:''; ?>">
-                                <?php echo form_error('Zdrzanie','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Kilometer nehody</label>
-                                <input type="text" class="form-control" name="KM_nehody" placeholder="Zadajte kilometer nehody" value="<?php echo !empty($post['KM_nehody'])?$post['KM_nehody']:''; ?>">
-                                <?php echo form_error('KM_nehody','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="title">Príčina</label>
-                                <input type="text" class="form-control" name="pricina" placeholder="Zadajte príčinu" value="<?php echo !empty($post['pricina'])?$post['pricina']:''; ?>">
-                                <?php echo form_error('pricina','<p class="help-block text-danger">','</p>'); ?>
-                            </div>
-
-
-
-                            <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrdiť"/>
-                        </form>
+                    <div class="form-group">
+                        <label>Oblasť:</label>
+                        <p><?php echo
+                            !empty($cesty['idOblast'])?$cesty['idOblast']:'';
+                            ?></p>
                     </div>
+
+                    <div class="form-group">
+                        <label>Kategória cesty:</label>
+                        <p><?php echo
+                            !empty($cesty['idKategorie'])?$cesty['idKategorie']:'';
+                            ?></p>
+                    </div>
+
                 </div>
             </div>
         </div>
