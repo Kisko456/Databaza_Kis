@@ -1,3 +1,11 @@
+<?php
+$connect = mysqli_connect("localhost", "root", "", "cesty");
+$query = "SELECT Kraj, count(*) as number FROM oblast GROUP BY Kraj";
+$result = mysqli_query($connect, $query);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -6,6 +14,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart()
+        {
+            var data = google.visualization.arrayToDataTable([
+                ['Kraj', 'Number'],
+                <?php
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "['".$row["Kraj"]."', ".$row["number"]."],";
+                }
+                ?>
+            ]);
+            var options = {
+                title: 'Podieľ jednotlivých krajov',
+                //is3D:true,
+                pieHole: 0.4
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
+
+
+
+
+
+
 
 </head>
 <body>
@@ -39,7 +81,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url() ?>Home.php">Domov</a>
+                <a class="navbar-brand" href="<?php echo base_url();?>Home.php">Domov</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -122,6 +164,27 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <br /><br />
+    <div style="width:900px;">
+        <h3 align="center">Koláčový graf rozdelenia krajov</h3>
+        <br />
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+
+
+
+
+
+
+
+
+
 
 
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
