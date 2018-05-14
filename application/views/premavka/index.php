@@ -1,3 +1,11 @@
+<?php
+$connect = mysqli_connect("localhost", "root", "", "cesty");
+$query = "SELECT Rychlost_premavky, count(*) as number FROM premavka GROUP BY Rychlost_premavky";
+$result = mysqli_query($connect, $query);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -5,7 +13,39 @@
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart()
+        {
+            var data = google.visualization.arrayToDataTable([
+                ['Rychlost_premavky', 'Number'],
+                <?php
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "['".$row["Rychlost_premavky"]."', ".$row["number"]."],";
+                }
+                ?>
+            ]);
+            var options = {
+                title: 'Rýchlosť premávky',
+                //is3D:true,
+                pieHole: 0.4
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
 
 </head>
 <body>
@@ -92,10 +132,12 @@
                     <table id="usertable" class="table table-striped">
                         <thead>
                         <tr>
-                            <th width="20%">Počet áut denne</th>
-                            <th width="20%">Rýchlosť premávky</th>
-                            <th width="20%">Zdržanie</th>
-                            <th width="20%">Číslo cesty</th>
+                            <th width="15%">Počet áut denne</th>
+                            <th width="15%">Rýchlosť premávky</th>
+                            <th width="15%">Zdržanie</th>
+                            <th width="15%">Číslo cesty</th>
+                            <th width="20%"></th>
+
 
 
                         </tr>
@@ -125,6 +167,15 @@
         </div>
     </div>
 
+    <br /><br />
+    <div style="width:900px;">
+        <h3 align="center">Koláčový graf v závislosti od rýchlosti premávky</h3>
+        <br />
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+
+
+
 
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
@@ -137,6 +188,14 @@
             $('#usertable').DataTable();
         });
     </script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+
+
+
+
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>

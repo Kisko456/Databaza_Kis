@@ -97,6 +97,7 @@
                             <th width="10%">Čas</th>
                             <th width="10%">Zdržanie</th>
                             <th width="15%">Kilometer nehody</th>
+                            <th width="20%"></th>
 
 
 

@@ -3,21 +3,23 @@
 class Oblast extends CI_Controller
 {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('Oblast_model');
     }
 
-    public function index(){
+    public function index()
+    {
         $data = array();
         //ziskanie sprav zo session
-        if($this->session->userdata('success_msg')){
+        if ($this->session->userdata('success_msg')) {
             $data['success_msg'] = $this->session->userdata('success_msg');
             $this->session->unset_userdata('success_msg');
         }
-        if($this->session->userdata('error_msg')){
+        if ($this->session->userdata('error_msg')) {
             $data['error_msg'] = $this->session->userdata('error_msg');
             $this->session->unset_userdata('error_msg');
         }
@@ -30,22 +32,20 @@ class Oblast extends CI_Controller
     }
 
 
-
-
-
     // Zobrazenie detailu
-    public function view($id){
+    public function view($id)
+    {
         $data = array();
 
         //kontrola, ci bolo zaslane id riadka
-        if(!empty($id)){
+        if (!empty($id)) {
             $data['oblast'] = $this->Oblast_model->getRows($id);
             $data['title'] = $data['oblast']['Stat'];
             //nahratie detailu zaznamu
 
             $this->load->view('oblast/view', $data);
 
-        }else{
+        } else {
             redirect('/oblast');
 
         }
@@ -53,12 +53,13 @@ class Oblast extends CI_Controller
 
 
     // pridanie zaznamu
-    public function add(){
+    public function add()
+    {
         $data = array();
         $postData = array();
 
         //zistenie, ci bola zaslana poziadavka na pridanie zazanmu
-        if($this->input->post('postSubmit')){
+        if ($this->input->post('postSubmit')) {
             //definicia pravidiel validacie
             $this->form_validation->set_rules('Stat', 'Stat', 'required');
             $this->form_validation->set_rules('Kraj', 'Kraj', 'required');
@@ -75,14 +76,14 @@ class Oblast extends CI_Controller
             );
 
             //validacia zaslanych dat
-            if($this->form_validation->run() == true){
+            if ($this->form_validation->run() == true) {
                 //vlozenie dat
                 $insert = $this->Oblast_model->insert($postData);
 
-                if($insert){
+                if ($insert) {
                     $this->session->set_userdata('success_msg', 'Záznam bol úspešne vložený.');
                     redirect('/oblast');
-                }else{
+                } else {
                     $data['error_msg'] = 'Nastala chyba, skúste to znova.';
                 }
             }
@@ -98,13 +99,14 @@ class Oblast extends CI_Controller
     }
 
     // aktualizacia dat
-    public function edit($id){
+    public function edit($id)
+    {
         $data = array();
         //ziskanie dat z tabulky
         $postData = $this->Oblast_model->getRows($id);
 
         //zistenie, ci bola zaslana poziadavka na aktualizaciu
-        if($this->input->post('postSubmit')){
+        if ($this->input->post('postSubmit')) {
             //definicia pravidiel validacie
             $this->form_validation->set_rules('Stat', 'Stat', 'required');
             $this->form_validation->set_rules('Kraj', 'Kraj', 'required');
@@ -120,14 +122,14 @@ class Oblast extends CI_Controller
             );
 
             //validacia zaslanych dat
-            if($this->form_validation->run() == true){
+            if ($this->form_validation->run() == true) {
                 //aktualizacia dat
                 $update = $this->Oblast_model->update($postData, $id);
 
-                if($update){
+                if ($update) {
                     $this->session->set_userdata('success_msg', 'Záznam bol úspešne upravený.');
                     redirect('/oblast');
-                }else{
+                } else {
                     $data['error_msg'] = 'Nastala chyba, skúste to znova.';
                 }
             }
@@ -143,18 +145,22 @@ class Oblast extends CI_Controller
     }
 
     // odstranenie dat
-    public function delete($id){
+    public function delete($id)
+    {
 
 
-        if($id){
+        if ($id) {
             //odstranenie zaznamu
             $delete = $this->Oblast_model->delete($id);
-            if($delete){
+            if ($delete) {
                 $this->session->set_userdata('success_msg', 'Záznam bol úspešne odstránený.');
-            }else{
+            } else {
                 $this->session->set_userdata('error_msg', 'Nastala chyba, skúste to znova.');
             }
         }
         redirect('/oblast');
     }
+
+
+
 }

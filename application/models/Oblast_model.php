@@ -42,4 +42,8 @@ class Oblast_model extends CI_Model {
         $delete = $this->db->delete('oblast',array('idOblast'=>$id));
         return $delete?true:false;
     }
+
+
+
+
 }

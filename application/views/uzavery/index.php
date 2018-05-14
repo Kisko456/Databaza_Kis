@@ -97,6 +97,7 @@
                             <th width="10%">Koniec uzávery</th>
                             <th width="15%">Priemerné zdržanie</th>
                             <th width="15%">Dĺžka obchádzky</th>
+                            <th width="20%"></th>
 
 
                         </tr>

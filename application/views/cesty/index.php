@@ -94,6 +94,7 @@
                         <tr>
                             <th width="20%">Oblasť</th>
                             <th width="20%">Kategória</th>
+                            <th width="20%"></th>
 
 
                         </tr>

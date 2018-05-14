@@ -2,10 +2,16 @@
 <html lang="en-US">
 <head>
 
+
+    <title>Doprava na Slovensku</title>
+
+
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+
 
 </head>
 <body>
@@ -92,9 +98,10 @@
                     <table id="usertable" class="table table-striped">
                         <thead>
                         <tr>
-                            <th width="20%">Kategória cesty</th>
+                            <th width="5%">Kategória cesty</th>
                             <th width="20%">Číslo cesty</th>
                             <th width="20%">Dĺžka cesty v KM</th>
+                            <th width="20%"></th>
 
 
                         </tr>
@@ -138,6 +145,8 @@
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+
 
     <!--
     <div class="row">
