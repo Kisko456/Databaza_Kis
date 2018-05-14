@@ -74,21 +74,13 @@ $result = mysqli_query($connect, $query);
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo base_url();?>Home.php">Domov</a>
-            </div>
+
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active">Oblasti</a></li>
-                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active">Kategórie</a></li>
+                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active"> Oblasti</a></li>
+                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active"> Kategórie</a></li>
                     <li><a class="glyphicon glyphicon-alert" href="<?php echo site_url('nehody/index'); ?>" class="active"> Nehody</a></li>
                     <li><a class="glyphicon glyphicon-exclamation-sign" href="<?php echo site_url('uzavery/index'); ?>" class="active"> Uzávery</a></li>
                     <li><a class="glyphicon glyphicon-road" href="<?php echo site_url('cesty/index'); ?>" class="active"> Cesty</a></li>
@@ -170,7 +162,7 @@ $result = mysqli_query($connect, $query);
 
 
 
-    <br /><br />
+
     <div style="width:900px;">
         <h3 align="center">Koláčový graf rozdelenia krajov</h3>
         <br />
@@ -202,16 +194,17 @@ $result = mysqli_query($connect, $query);
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+
     <!--
-    <div class="row">
-        <div class="span12">
-            <div class="well">
-                <center><h3> Copyright &copy; Michal Kis </center></h3>
-            </div>
-            </div>
-            </div>
-    </div>
-    -->
+     <div class="row">
+         <div class="span12">
+             <div class="well">
+                 <center><h3> Copyright &copy; Michal Kis </center></h3>
+             </div>
+             </div>
+             </div>
+     </div>
+     -->
 
 </body>
 </html>

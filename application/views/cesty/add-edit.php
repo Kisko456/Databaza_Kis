@@ -32,21 +32,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo base_url() ?>Home.php">Domov</a>
-            </div>
+
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active">Oblasti</a></li>
-                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active">Kategórie</a></li>
+                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active"> Oblasti</a></li>
+                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active"> Kategórie</a></li>
                     <li><a class="glyphicon glyphicon-alert" href="<?php echo site_url('nehody/index'); ?>" class="active"> Nehody</a></li>
                     <li><a class="glyphicon glyphicon-exclamation-sign" href="<?php echo site_url('uzavery/index'); ?>" class="active"> Uzávery</a></li>
                     <li><a class="glyphicon glyphicon-road" href="<?php echo site_url('cesty/index'); ?>" class="active"> Cesty</a></li>
@@ -87,15 +79,13 @@
                         <form method="post" action="" class="form">
 
                             <div class="form-group">
-                                <label for="title">Oblasť</label>
-                                <input type="text" class="form-control" name="idOblast" id="Kategoria" placeholder="Zadajte oblasť" value="<?php echo !empty($post['idOblast'])?$post['idOblast']:''; ?>">
-                                <?php echo form_error('idOblast','<p class="help-block text-danger">','</p>'); ?>
+                                <?php echo form_label('Názov oblasti:'); ?>
+                                <?php echo form_dropdown('idOblast', $oblast, $oblast_selected, 'class="form-control"'); ?>
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Kategória cesty</label>
-                                <input type="text" class="form-control" name="idKategorie" placeholder="Zadajte kategóriu" value="<?php echo !empty($post['idKategorie'])?$post['idKategorie']:''; ?>">
-                                <?php echo form_error('idKategorie','<p class="help-block text-danger">','</p>'); ?>
+                                <?php echo form_label('Názov kategórie:'); ?>
+                                <?php echo form_dropdown('idKategorie', $kategorie, $kategorie_selected, 'class="form-control"'); ?>
                             </div>
 
                             <input type="submit" name="postSubmit" class="btn btn-primary" value="Potvrdiť"/>

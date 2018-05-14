@@ -84,6 +84,11 @@ class Cesty extends CI_Controller
                 }
             }
         }
+
+        $data['oblast'] = $this->Cesty_model->get_oblast_dropdown();
+        $data['oblast_selected'] = '';
+        $data['kategorie'] = $this->Cesty_model->get_kategorie_dropdown();
+        $data['kategorie_selected'] = '';
         $data['post'] = $postData;
         $data['title'] = 'Create kategoriu';
 
@@ -126,6 +131,10 @@ class Cesty extends CI_Controller
             }
         }
 
+        $data['oblast'] = $this->Cesty_model->get_oblast_dropdown();
+        $data['oblast_selected'] = $postData['idOblast'];
+        $data['kategorie'] = $this->Cesty_model->get_kategorie_dropdown();
+        $data['kategorie_selected'] = $postData['idKategorie'];
         $data['post'] = $postData;
         $data['title'] = 'Update Temperature';
         $data['action'] = 'Upraviť';

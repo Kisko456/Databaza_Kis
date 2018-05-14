@@ -42,4 +42,9 @@ class Nehody_model extends CI_Model {
         $delete = $this->db->delete('nehody',array('idNehody'=>$id));
         return $delete?true:false;
     }
+
+
+
+
+
 }

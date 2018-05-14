@@ -1,3 +1,10 @@
+<?php
+$connect = mysqli_connect("localhost", "root", "", "cesty");
+$query = "SELECT Kategoria, count(*) as number FROM kategorie GROUP BY Kategoria";
+$result = mysqli_query($connect, $query);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -10,6 +17,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart()
+        {
+            var data = google.visualization.arrayToDataTable([
+                ['Kategoria', 'Number'],
+                <?php
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "['".$row["Kategoria"]."', ".$row["number"]."],";
+                }
+                ?>
+            ]);
+            var options = {
+                title: 'Podieľ kategórií ciest',
+                //is3D:true,
+                pieHole: 0.4
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
 
 
 
@@ -38,21 +72,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?php echo base_url() ?>Home.php">Domov</a>
-            </div>
+
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active">Oblasti</a></li>
-                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active">Kategórie</a></li>
+                    <li><a class="glyphicon glyphicon-globe" href="<?php echo site_url('oblast/index'); ?>" class="active"> Oblasti</a></li>
+                    <li><a class="glyphicon glyphicon-filter" href="<?php echo site_url('kategorie/index'); ?>" class="active"> Kategórie</a></li>
                     <li><a class="glyphicon glyphicon-alert" href="<?php echo site_url('nehody/index'); ?>" class="active"> Nehody</a></li>
                     <li><a class="glyphicon glyphicon-exclamation-sign" href="<?php echo site_url('uzavery/index'); ?>" class="active"> Uzávery</a></li>
                     <li><a class="glyphicon glyphicon-road" href="<?php echo site_url('cesty/index'); ?>" class="active"> Cesty</a></li>
@@ -129,6 +155,17 @@
             </div>
         </div>
     </div>
+
+
+
+    <div style="width:900px;">
+        <h3 align="center">Koláčový graf rozdelenia kategórií ciest</h3>
+        <br />
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+
+
+
 
 
     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

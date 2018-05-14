@@ -42,4 +42,9 @@ class Premavka_model extends CI_Model {
         $delete = $this->db->delete('premavka',array('idPremavka'=>$id));
         return $delete?true:false;
     }
+
+
+   
+
+
 }
