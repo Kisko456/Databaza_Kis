@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "cesty");
+$connect = mysqli_connect("localhost", "aktualnadoprava", "admin", "cesty");
 $query = "SELECT Kraj, count(*) as number FROM oblast GROUP BY Kraj";
 $result = mysqli_query($connect, $query);
 ?>

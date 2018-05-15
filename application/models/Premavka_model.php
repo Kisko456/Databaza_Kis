@@ -44,7 +44,7 @@ class Premavka_model extends CI_Model {
     }
 
 
-   
+
 
 
 }

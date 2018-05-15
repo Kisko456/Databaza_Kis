@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "cesty");
+$connect = mysqli_connect("localhost", "aktualnadoprava", "admin", "cesty");
 $query = "SELECT Rychlost_premavky, count(*) as number FROM premavka GROUP BY Rychlost_premavky";
 $result = mysqli_query($connect, $query);
 ?>

@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "cesty");
+$connect = mysqli_connect("localhost", "aktualnadoprava", "admin", "cesty");
 $query = "SELECT Kategoria, count(*) as number FROM kategorie GROUP BY Kategoria";
 $result = mysqli_query($connect, $query);
 ?>
